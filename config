@@ -1,0 +1,427 @@
+#
+# Si vous devez changer de configuration de clavier (azerty <=> qwerty), effacez ce fichier et relancez:
+# i3-config-wizard(1).
+#
+ 
+# i3 config file (v4)
+#
+# Merci de lire http://i3wm.org/docs/userguide.html pour l'ensemble des paramètres possibles!
+
+# Définition de Mod4 (touche Super ou Windows) en tant que modificateur principal:
+set $mod Mod4
+ 
+# Définition de Alt en tant que modificateur secondaire (pour mes raccourcis):
+set $alt Mod1
+ 
+# police des titres de fenêtres. ISO 10646 = Unicode
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+ 
+# Utilisation de la souris+$mod pour déplacer les fenêtres flottantes:
+floating_modifier $mod
+ 
+### Raccourcis clavier
+######
+
+# ouvrir un terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec urxvt
+bindsym $mod+Shift+Return exec lxterminal
+
+# $mod et Fx pour lancer des applis courantes
+bindsym $mod+F1 exec firefox
+bindsym $mod+F2 exec qutebrowser
+bindsym $mod+F11 exec /home/skippy/Cryptomonaies/Elite-qt -datadir=/mnt/datas/backup_stkmint/.1337
+bindsym $mod+F12 exec jaxx
+
+# fermer (tuer) la fenêtre ayant le focus:
+bindsym $alt+F4 kill
+ 
+## démarrer le lanceur de menu 'dmenu' (paquet suckless-tools)
+bindsym $alt+F2 exec dmenu_run
+# 
+bindsym $alt+Escape exec jgmenu
+
+## déplacer le focus entre les fenêtres avec hjkl:
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+ 
+# ou avec les touches fléchées:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+ 
+# déplacer la fenêtre active avec jklm:
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+ 
+# ou avec les touches fléchées:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+ 
+# diviser horizontalement (ex: mod+o suivi de mod+Entrée crée un nouveau terminal à côté du premier)
+bindsym $mod+o split h
+ 
+# diviser verticalement (ex: mod+u suivi de mod+Entrée crée un nouveau terminal sous le premier)
+bindsym $mod+u split v
+ 
+# mise en plein écran de la fenêtre active:
+bindsym $mod+f fullscreen
+ 
+# changer le mode d'affichage des containers:
+# stacked: fenêtres maximisées, barres de titre des fenetres ouvertes empilées,
+# tabbed: fenêtres maximisées, barres de titre des fenetres ouvertes les unes à côtés des autres, comme des onglets,
+# default: tiling (pavage).
+bindsym $mod+s layout stacking
+bindsym $mod+z layout tabbed
+bindsym $mod+e layout default
+ 
+# alterner l'affichage de la fenêtre active entre flottant et tiling:
+bindsym $mod+Shift+space floating toggle
+ 
+# alterner le focus entre les fenêtres en tiling et celle(s) flottante(s) :
+bindsym $mod+space focus mode_toggle
+ 
+# donner le focus au container père:
+bindsym $mod+q focus parent
+ 
+# donner le focus au container fils:
+bindsym $mod+d focus child
+ 
+# Jumper sur la fenêtre "urgent"
+bindsym $mod+i [urgent=latest] focus
+
+## Espaces de travail
+
+# 1 = Principal (web + term + video)
+# 2 = Messagerie (irc + mails + rss + jabber)
+# 3 = Fichier (vifm + ...)
+# ...
+# 11 = Son (ncmpc + pavucontrol + cava)
+# 12 = Torrent (transmision)
+
+## se déplacer entre espaces de travail:
+bindsym $mod+ampersand workspace 1
+bindsym $mod+eacute workspace 2
+bindsym $mod+quotedbl workspace 3
+bindsym $mod+apostrophe workspace 4
+bindsym $mod+parenleft workspace 5
+bindsym $mod+minus workspace 6
+bindsym $mod+egrave workspace 7
+bindsym $mod+underscore workspace 8
+bindsym $mod+ccedilla workspace 9
+bindsym $mod+agrave workspace 10
+bindsym $mod+parenright workspace 11
+bindsym $mod+equal workspace 12
+ 
+# déplacer la fenêtre active vers un espace de travail:
+bindsym $mod+Shift+ampersand move container to workspace 1
+bindsym $mod+Shift+eacute move container to workspace 2
+bindsym $mod+Shift+quotedbl move container to workspace 3
+bindsym $mod+Shift+apostrophe move container to workspace 4
+bindsym $mod+Shift+parenleft move container to workspace 5
+bindsym $mod+Shift+minus move container to workspace 6
+bindsym $mod+Shift+egrave move container to workspace 7
+bindsym $mod+Shift+underscore move container to workspace 8
+bindsym $mod+Shift+ccedilla move container to workspace 9
+bindsym $mod+Shift+agrave move container to workspace 10
+bindsym $mod+Shift+parenright move container to workspace 11
+bindsym $mod+Shift+equal move container to workspace 12
+ 
+# recharger la configuration d'i3 (relecture du présent fichier, ne nécessite pas de redémarrage d'i3):
+bindsym $mod+Shift+C reload
+ 
+# redémarrer i3 sur place (conserve la session et l'organisation actuelle, peut être utiliser pour une mise à jour d'i3)
+bindsym $mod+Shift+R restart
+ 
+# quitter i3 (met fin à votre session X):
+bindsym $mod+Shift+E exit
+
+# Execute mpv avec le contenu du presse-papier de X
+bindsym $mod+v exec "mpv $(xclip -o)"
+ 
+### redimensionner la fenêtre (la souris peut aussi être utilisée):
+set $mode_resize h j k l
+mode "$mode_resize" {
+        # Ces raccourcis fonctionnent dès l'entrée en mode "resize"
+ 
+        # h pour réduire la largeur de 10
+        # j pour agrandir la largeur de 10
+        # k pour agrandir la hauteur de 10
+        # l pour réduire la hauteur de 10
+#        bindsym h resize shrink width 10 px or 10 ppt
+#        bindsym j resize grow height 10 px or 10 ppt
+#        bindsym k resize shrink height 10 px or 10 ppt
+#        bindsym l resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+ 
+        # idem mais avec les touches fléchées
+#        bindcode 113 resize shrink width 10 px or 10 ppt
+#        bindcode 116 resize grow height 10 px or 10 ppt
+#        bindcode 111 resize shrink height 10 px or 10 ppt
+#        bindcode 114 resize grow width 10 px or 10 ppt
+ 
+        # Echap pour revenir en mode perso
+		bindsym Escape mode "$mode_perso"
+        # Window+Echap pour revenir en mode default
+		bindsym $mod+Escape mode "default"
+}
+ 
+# Exécute différents raccourcis claviers personels
+set $mode_mpd (space) toggle, (n) next, (b) previous,(x) random (,) vol-, (;) vol+
+mode "$mode_mpd" {
+		#bindsym t exec mpc toggle
+		bindsym space exec mpc toggle
+		bindsym n exec mpc next
+		bindsym b exec mpc prev	
+		bindsym x exec mpc random
+		bindsym comma exec mpc volume -10
+		bindsym semicolon exec mpc volume +10
+        # Echap pour revenir en mode perso
+		bindsym Escape mode "$mode_perso"
+        # Window+Echap pour revenir en mode default
+		bindsym $mod+Escape mode "default"
+}
+
+set $mode_dmenu (1) todo, (1) wall, (3) web search, (4) home
+mode "$mode_dmenu" {
+#ampersand eacute quotedbl apostrophe parenleft minus egrave underscore ccedilla agrave parenright equal
+		bindsym ampersand exec sh /home/skippy/bin/dmenu_todo.sh
+		bindsym eacute exec sh /home/skippy/bin/dmenu_wall.sh
+		bindsym quotedbl exec sh /home/skippy/bin/dmenu_searchengine.sh
+		bindsym apostrophe exec sh /home/skippy/bin/dmenu_home.sh
+        # Echap pour revenir en mode perso
+		bindsym Escape mode "$mode_perso"
+        # Window+Echap pour revenir en mode default
+		bindsym $mod+Escape mode "default"
+}
+
+set $mode_jeux (m) openmw
+mode "$mode_jeux" {
+		bindsym m exec openmw; mode "default"
+
+		bindsym Escape mode "$mode_perso"
+        # Window+Echap pour revenir en mode default
+		bindsym $mod+Escape mode "default"
+
+}
+
+set $mode_synergys (s) synergys (k) Kill synergys
+mode "$mode_synergys" {
+		bindsym s exec synergys; mode "default"
+		bindsym k exec killall synergys; mode "default"
+
+		bindsym Escape mode "$mode_perso"
+        # Window+Echap pour revenir en mode default
+		bindsym $mod+Escape mode "default"
+
+}
+
+#set $mode_faucet
+#mode "$mode_faucet" {
+#		
+#}
+
+set $mode_perso (d) dmenu, (m) mpd, (r) resize, (j) jeux, (s) synergys, (f) faucet, (e) edit config
+mode "$mode_perso" {
+		bindsym d mode "$mode_dmenu"
+		bindsym m mode "$mode_mpd"
+		bindsym r mode "$mode_resize"
+		bindsym j mode "$mode_jeux"
+		bindsym s mode "$mode_synergys"
+		bindsym f mode "$mode_faucet"
+		bindsym e exec urxvt -e vim $HOME/.config/i3/config
+#		bindsym w exec firefox; mode "default"
+#		bindsym $mod+m exec urxvt -name mutt -e mutt; mode "default"
+#		bindsym $mod+w exec urxvt -name weechat -e screen -dR irc; mode "default"
+#		bindsym a exec arcticcoin-qt; mode "default"
+#	#	bindsym t exec "urxvt -e top; urxvt -e htop"; mode "default"
+#		bindsym	u exec $HOME/.screenlayout/hdmi-up.sh; mode "default"
+#		bindsym o exec $HOME/.screenlayout/hdmi-right.sh; mode "default"
+
+
+        # Echap pour revenir en mode default
+		bindsym Escape mode "default"
+        # Window+Echap pour revenir en mode default
+		bindsym $mod+Escape mode "default"
+
+}
+
+bindsym $mod+Escape mode "$mode_perso"
+
+# Execute i3-input pour commandes internes de i3
+bindsym Control+Escape exec i3-input
+
+
+## i3bar permet  l'affichage des espaces de travail (si i3status est disponible, des infos systèmes sont affichées)
+bar {
+        # démarrer i3status dans i3bar
+		status_command $HOME/.config/i3/conky-i3bar-top
+        #status_command i3status
+        #status_command i3blocks
+        # position de la barre (top | bottom)
+	position top
+        # le system-tray reste sur l'écran principal
+	tray_output primary
+ 
+# définition des couleurs des noms d'espaces de travail dans i3bar:
+	colors {
+#				  <bordure> <arrière plan> <texte>
+		#focused_workspace #FF00FF   #111111         #00FF00
+		focused_workspace #2290B5   #111111         #2290B5
+# définition de la couleur de police de i3status:
+		#statusline	  #EEEEEE
+		statusline	  #2290B5
+ 
+		}
+}
+bar {
+		output eDP
+		status_command $HOME/.config/i3/conky-i3bar-bottom
+        position bottom
+}
+ 
+## Début de ma configuration personnalisée: ##
+##############################################
+ 
+# Le focus ne suit pas la souris (évite le coup de paume sur le touchpad)
+focus_follows_mouse no
+ 
+# Lors du passage à un workspace, retaper le raccourci de ce workspace ramène à celui dont je viens
+workspace_auto_back_and_forth yes
+ 
+# Comportement des nouveaux containers (tabbed | stack | default ie tiled)
+#workspace_layout default
+workspace_layout tabbed
+ 
+# Bordure des nouvelles fenêtres (normal | none | 1pixel | pixel n)
+# fenêtres normales:
+
+# fenêtres flottantes:
+new_float normal
+ 
+# Assignation des logiciels à un espace:
+assign [class="qutebrowser"] 1
+assign [class="Uzbl-core" instance="uzbl-core"] 1
+assign [class="URxvt" instance="weechat"] 2
+assign [class="Messenger for Desktop" ] 2
+assign [class="Whatsie"] 2
+assign [class="Ripcord"] 2
+assign [class="Pavucontrol" instance="pavucontrol"] 3
+assign [class="Mail" instance="Thunderbird"] 5
+assign [class="Qemu-system-x86_64" instance="qemu-system-x86_64"] 6
+assign [class="URxvt" instance="ncmpcpp"] 11
+assign [class="URxvt" instance="ncmpc"] 11
+assign [class="URxvt" instance="mpd"] 11
+assign [class="URxvt" instance="alsamixer"] 11
+assign [class="URxvt" instance="transmission"] 12
+ 
+### Applications à démarrer avec i3 (ce sont des exemples persos, vous mettez bien ce que vous voulez ;):
+
+# Wallpaper
+exec /usr/bin/feh --bg-scale /home/skippy/Images/Wallpapers/my_humble_dwelling__by_kevinflemming1982-dcadbxj.png
+# Transparence
+#exec /usr/bin/xcompmgr
+#exec /usr/bin/devilspie -a
+# Applets du systray
+exec /usr/bin/nm-applet
+exec /usr/bin/blueman-applet
+exec /usr/bin/volumeicon
+exec numlockx on
+# Messageries
+exec urxvt -name weechat -e weechat
+exec whatsie
+exec messengerfordesktop
+exec ripcord
+# Mails
+exec urxvt -name mutt -e mutt
+exec thunderbird
+# Souris (fait "disparaitre" le curseur au bout d'une seconde d'inactivité)
+exec unclutter -idle 1
+ 
+# Modification des couleurs de la fenêtre ayant le focus:
+# class	       	   bordure	fond	texte	indicateur
+#client.focused	   #FF00FF	#111111	#00FF00	#FF00FF
+client.focused	   #2290B5	#111111	#2290B5	#FF00FF
+ 
+# Il est possible de définir des raccourcis d'applications de 2 façons:
+# bindsym renvoie au symbole de la touche (ça peut être aléatoire selon la disposition du clavier);
+# bindcode renvoie au code de la touche obtenu via l'utilitaire de test d'évenements xev", 
+# c'est donc une méthode préférable pour les touches particulières:
+ 
+# Définition des raccourcis d'applications (avec bindsym)
+#bindsym $mod+$alt+g exec gimp
+bindsym XF86MonBrightnessUp exec sudo sh $HOME/bin/stk_bright_up.sh
+bindsym $mod+XF86AudioRaiseVolume exec sudo sh $HOME/bin/stk_bright_up.sh
+bindsym XF86MonBrightnessDown exec sudo sh $HOME/bin/stk_bright_down.sh
+bindsym $mod+XF86AudioLowerVolume exec sudo sh $HOME/bin/stk_bright_down.sh
+ 
+# Définition des raccourcis d'applications (avec bindcode)
+bindcode 122 exec amixer -q set Master 5dB- unmute
+bindcode 123 exec amixer -q set Master 5dB+ unmute
+bindcode 78  exec i3lock 
+#bindcode 220 exec sakura -x finch
+#bindcode 173 exec mocp --previous
+#bindcode 172 exec mocp --next
+#bindcode 172 exec mocp --toggle-pause
+bindcode 107 exec scrot
+#bindcode Control+$alt+119 exec sh /home/sogal/.script/arret.sh
+
+ 
+# Raccourcis des mouvements entre espaces grâce aux touches fléchées
+bindsym Ctrl+$alt+Left workspace prev
+bindsym Ctrl+$alt+Right workspace next
+ 
+# Raccourci pour alterner entre les modes de bordures (normale, 1 pixel ou aucune)
+bindsym $mod+b border toggle
+
+# Bascule entre les fils d'un même cadre
+#bindsym $mod+Tab 
+
+# Bascule entre les cadres d'un même écran
+#binsym $alt+Tab 
+# Espace entre cadres
+
+
+# Passe la video en fullscreen dans une frame
+# A tester avec vlc/mpv/FF&YT
+#bindsym $mod+y fullscreen disable; floating enable; resize set 400 300; sticky enable; move window to position 1515 20
+
+
+# Assign miscellaneous settings (the last four require i3-gaps)
+font pango:Terminus 8
+hide_edge_borders both
+
+gaps inner 8
+gaps outer 0
+smart_borders on
+smart_gaps on
+
+
+## Manual management of external displays
+# Set the shortcuts and what they do
+# À gentiment reconfigurer, le nom des écrans et posisitions
+set $mode_display Ext Screen (u) HDMI UP, (o) HDMI OFF
+mode "$mode_display" {
+	bindsym u exec --no-startup-id xrandr --output eDP --primary --mode 1600x900 --pos 0x1024 --rotate normal --output HDMI-A-0 --mode 1280x1024 --pos 128x0 --rotate normal; mode "default"
+	bindsym o exec --no-startup-id xrandr --output eDP --primary --mode 1600x900 --pos 0x1024 --rotate normal --output HDMI-A-0 --off; mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+# Declare here the shortcut to bring the display selection menu
+bindsym $mod+F4 mode "$mode_display"
+
+
+
+# vim:filetype=i3:foldmethod=manual
