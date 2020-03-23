@@ -33,18 +33,14 @@ cpu_avg_samples 2
 # Stuff after 'TEXT' will be formatted on screen
 TEXT
 
-# JSON for i3bar
+#${execi 60 curl -0 https://assets.coingecko.com/coins/images/5/thumb/dogecoin.png}
+#${image $HOME/dogecoin.png}
 
+# JSON for i3bar
  [
   { "full_text" : "(BTC) : ${execi 60 curl https://api.coingecko.com/api/v3/coins/bitcoin | jq ".market_data.current_price.eur" | sed "s/\([0-9]*\.[0-9][0-9][0-9][0-9]\).*/\1/"}" , "color" : "\#ffffff" },
-  { "full_text" : "(1337) : ${execi 60 curl https://api.coingecko.com/api/v3/coins/1337 | jq ".market_data.current_price.eur" | sed "s/\([0-9]*\.[0-9][0-9][0-9][0-9]\).*/\1/"}" , "color" : "\#ffffff" },
+  { "full_text" : "(DOGE) : ${execi 60 curl https://api.coingecko.com/api/v3/coins/dogecoin | jq ".market_data.current_price.eur" | sed "s/\([0-9]*\.[0-9][0-9][0-9][0-9]\).*/\1/"}" , "color" : "\#ffffff" },
   { "full_text" : "(ARC) : ${execi 60 curl https://api.coingecko.com/api/v3/coins/arcticcoin | jq ".market_data.current_price.eur" | sed "s/\([0-9]*\.[0-9][0-9][0-9][0-9]\).*/\1/" }" , "color" : "\#ffffff" },
-  { "full_text" : "(IPBC) : ${execi 60 curl https://api.coingecko.com/api/v3/coins/interplanetary-broadcast-coin | jq ".market_data.current_price.eur" | sed "s/\([0-9]*\.[0-9][0-9][0-9][0-9]\).*/\1/" }" , "color" : "\#ffffff" },
   { "full_text" : "(BRO) : ${execi 60 curl https://api.coingecko.com/api/v3/coins/bitradio | jq ".market_data.current_price.eur" | sed "s/\([0-9]*\.[0-9][0-9][0-9][0-9]\).*/\1/" }" , "color" : "\#ffffff" },
-  { "full_text" : "(ENT) : ${execi 60 curl https://api.coingecko.com/api/v3/coins/eternity | jq ".market_data.current_price.eur" | sed "s/\([0-9]*\.[0-9][0-9][0-9][0-9]\).*/\1/" }" , "color" : "\#ffffff" },
-  { "full_text" : "(CASH) : ${execi 60 curl https://api.coingecko.com/api/v3/coins/cashcoin | jq ".market_data.current_price.eur" | sed "s/\([0-9]*\.[0-9][0-9][0-9][0-9]\).*/\1/" }" , "color" : "\#ffffff" },
-  { "full_text" : "(POT) : ${execi 60 curl https://api.coingecko.com/api/v3/coins/potcoin | jq ".market_data.current_price.eur" | sed "s/\([0-9]*\.[0-9][0-9][0-9][0-9]\).*/\1/" }" , "color" : "\#ffffff" },
-  { "full_text" : "(STORJ) : ${execi 60 curl https://api.coingecko.com/api/v3/coins/storj | jq ".market_data.current_price.eur" | sed "s/\([0-9]*\.[0-9][0-9][0-9][0-9]\).*/\1/" }" , "color" : "\#ffffff" },
-  { "full_text" : "(BAT) : ${execi 60 curl https://api.coingecko.com/api/v3/coins/basic-attention-token | jq ".market_data.current_price.eur" | sed "s/\([0-9]*\.[0-9][0-9][0-9][0-9]\).*/\1/" }" , "color" : "\#ffffff" },
-  { "full_text" : "(PRE) : ${execi 60 curl https://api.coingecko.com/api/v3/coins/presearch| jq ".market_data.current_price.eur" | sed "s/\([0-9]*\.[0-9][0-9][0-9][0-9]\).*/\1/" }" , "color" : "\#ffffff" }
+  { "full_text" : "(BAT) : ${execi 60 curl https://api.coingecko.com/api/v3/coins/basic-attention-token | jq ".market_data.current_price.eur" | sed "s/\([0-9]*\.[0-9][0-9][0-9][0-9]\).*/\1/" }" , "color" : "\#ffffff" }
 ],

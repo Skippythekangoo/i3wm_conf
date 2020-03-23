@@ -37,6 +37,8 @@ TEXT
 # JSON for i3bar
 
  [
+  { "full_text" : "X,Y: ${execi 1 $(evel xdotool getmouselocation --shell; echo $X $Y)}" , "color" : "\#ffffff" },
+  { "full_text" : "X=${execi 1 $(xdotool getmouselocation | awk "{print $1}" | cut -d ":" -f 2)}" , "color" : "\#ffffff" },
   { "full_text" : "Bat : ${battery}" , "color" : "\#ffffff" },
   { "full_text" : "Temp CPU : ${hwmon 0 temp 2}°C" , "color" : "\#ffffff" },
   { "full_text" : "Temp GPU : ${hwmon 3 temp 1}°C" , "color" : "\#ffffff" },

@@ -29,15 +29,20 @@ bindsym $mod+Shift+Return exec lxterminal
 
 # $mod et Fx pour lancer des applis courantes
 bindsym $mod+F1 exec firefox
+bindsym $mod+Shift+F1 exec firefox -P demonaco -no-remote --class=FF_demonaco
+#bindsym $mod+Shift+F1 exec firefox -P Gérard -no-remote
 bindsym $mod+F2 exec qutebrowser
-bindsym $mod+F11 exec /home/skippy/Cryptomonaies/Elite-qt -datadir=/mnt/datas/backup_stkmint/.1337
+bindsym $mod+F3 exec brave-nightly
+bindsym $mod+F5 exec telegram-desktop
+bindsym $mod+Shift+F5 exec telegram-desktop -many -workdir $HOME/.telegramGerard/
+#bindsym $mod+F11 exec /home/skippy/Cryptomonaies/Elite-qt -datadir=/mnt/datas/backup_stkmint/.1337
 bindsym $mod+F12 exec jaxx
 
 # fermer (tuer) la fenêtre ayant le focus:
 bindsym $alt+F4 kill
  
 ## démarrer le lanceur de menu 'dmenu' (paquet suckless-tools)
-bindsym $alt+F2 exec dmenu_run
+#bindsym $alt+F2 exec dmenu_run
 # 
 bindsym $alt+Escape exec jgmenu
 
@@ -68,10 +73,7 @@ bindsym $mod+Shift+Right move right
 # diviser horizontalement (ex: mod+o suivi de mod+Entrée crée un nouveau terminal à côté du premier)
 bindsym $mod+o split h
  
-# diviser verticalement (ex: mod+u suivi de mod+Entrée crée un nouveau terminal sous le premier)
-bindsym $mod+u split v
- 
-# mise en plein écran de la fenêtre active:
+# diviser verticalement (ex: mod+u suivi de mod+Entrée crée un nouveau terminal sous le premier) bindsym $mod+u split v # mise en plein écran de la fenêtre active:
 bindsym $mod+f fullscreen
  
 # changer le mode d'affichage des containers:
@@ -135,7 +137,8 @@ bindsym $mod+Shift+parenright move container to workspace 11
 bindsym $mod+Shift+equal move container to workspace 12
  
 # recharger la configuration d'i3 (relecture du présent fichier, ne nécessite pas de redémarrage d'i3):
-bindsym $mod+Shift+C reload
+#bindsym $mod+Shift+C reload
+bindsym $mod+C reload
  
 # redémarrer i3 sur place (conserve la session et l'organisation actuelle, peut être utiliser pour une mise à jour d'i3)
 bindsym $mod+Shift+R restart
@@ -205,10 +208,11 @@ mode "$mode_dmenu" {
 		bindsym $mod+Escape mode "default"
 }
 
-set $mode_jeux (m) openmw
+set $mode_jeux (m) openmw, (f) forge of Empire (s) steam
 mode "$mode_jeux" {
 		bindsym m exec openmw; mode "default"
-
+		bindsym f exec qutebrowser https://fr0.forgeofempires.com/page/; mode "default"
+		bindsym s exec steam; mode "default"
 		bindsym Escape mode "$mode_perso"
         # Window+Echap pour revenir en mode default
 		bindsym $mod+Escape mode "default"
@@ -231,7 +235,7 @@ mode "$mode_synergys" {
 #		
 #}
 
-set $mode_perso (d) dmenu, (m) mpd, (r) resize, (j) jeux, (s) synergys, (f) faucet, (e) edit config
+set $mode_perso (d) dmenu, (m) mpd, (r) resize, (j) jeux, (s) synergys, (f) faucet, (e) edit config, (b) change le bureau d'écran
 mode "$mode_perso" {
 		bindsym d mode "$mode_dmenu"
 		bindsym m mode "$mode_mpd"
@@ -239,7 +243,8 @@ mode "$mode_perso" {
 		bindsym j mode "$mode_jeux"
 		bindsym s mode "$mode_synergys"
 		bindsym f mode "$mode_faucet"
-		bindsym e exec urxvt -e vim $HOME/.config/i3/config
+		bindsym e exec urxvt -e vim $HOME/.config/i3/config; mode "default"
+		bindsym b exec i3-msg move workspace to output down; mode "default"
 #		bindsym w exec firefox; mode "default"
 #		bindsym $mod+m exec urxvt -name mutt -e mutt; mode "default"
 #		bindsym $mod+w exec urxvt -name weechat -e screen -dR irc; mode "default"
@@ -257,38 +262,43 @@ mode "$mode_perso" {
 }
 
 bindsym $mod+Escape mode "$mode_perso"
-
+bindsym $mod+r		mode "mode_resize"
 # Execute i3-input pour commandes internes de i3
 bindsym Control+Escape exec i3-input
 
 
 ## i3bar permet  l'affichage des espaces de travail (si i3status est disponible, des infos systèmes sont affichées)
-bar {
-        # démarrer i3status dans i3bar
-		status_command $HOME/.config/i3/conky-i3bar-top
-        #status_command i3status
-        #status_command i3blocks
-        # position de la barre (top | bottom)
-	position top
-        # le system-tray reste sur l'écran principal
-	tray_output primary
- 
-# définition des couleurs des noms d'espaces de travail dans i3bar:
-	colors {
-#				  <bordure> <arrière plan> <texte>
-		#focused_workspace #FF00FF   #111111         #00FF00
-		focused_workspace #2290B5   #111111         #2290B5
-# définition de la couleur de police de i3status:
-		#statusline	  #EEEEEE
-		statusline	  #2290B5
- 
-		}
-}
+#bar {
+#        # démarrer i3status dans i3bar
+#		status_command $HOME/.config/i3/conky-i3bar-top
+#        #status_command i3status
+#        #status_command i3blocks
+#        # position de la barre (top | bottom)
+#		position top
+#        # le system-tray reste sur l'écran principal
+#		tray_output primary
+#		tray_padding 2
+# 
+#		# définition des couleurs des noms d'espaces de travail dans i3bar:
+#		colors {
+#							   #<bordure> <arrière plan>  <texte>
+#			focused_workspace	#2290B5   #111111         #2290B5
+#			# définition de la couleur de police de i3status:
+#			statusline			#2290B5
+#	 
+#			}
+#}
 bar {
 		output eDP
 		status_command $HOME/.config/i3/conky-i3bar-bottom
         position bottom
+		workspace_buttons no
+		tray_output none
 }
+
+# Polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
  
 ## Début de ma configuration personnalisée: ##
 ##############################################
@@ -312,23 +322,46 @@ new_float normal
 # Assignation des logiciels à un espace:
 assign [class="qutebrowser"] 1
 assign [class="Uzbl-core" instance="uzbl-core"] 1
+# Messagerie
 assign [class="URxvt" instance="weechat"] 2
 assign [class="Messenger for Desktop" ] 2
 assign [class="Whatsie"] 2
 assign [class="Ripcord"] 2
+# Son, bluetooth, réseau
 assign [class="Pavucontrol" instance="pavucontrol"] 3
-assign [class="Mail" instance="Thunderbird"] 5
-assign [class="Qemu-system-x86_64" instance="qemu-system-x86_64"] 6
-assign [class="URxvt" instance="ncmpcpp"] 11
-assign [class="URxvt" instance="ncmpc"] 11
-assign [class="URxvt" instance="mpd"] 11
-assign [class="URxvt" instance="alsamixer"] 11
-assign [class="URxvt" instance="transmission"] 12
+assign [class="Blueman-manager" instance="blueman-manager"] 3
+assign [class="pulseaudio-equalizer-gtk" instance="Pulseaudio-equalizer-gtk"] 3
+# Mail
+assign [class="Thunderbird"] 5
+# Impression 3D
+assign [class=cura"] 7
+assign [class="Pronterface.py"] 7
+assign [class="OpenSCAD"] 7
+assign [class="LibreCAD"] 7
+assign [class="fstl"] 7
+
+assign [class="Signal"] 10
+
+assign [class="FF_demonaco"] 12
+#assign [class="Qemu-system-x86_64" instance="qemu-system-x86_64"] 6
+#assign [class="URxvt" instance="ncmpcpp"] 11
+#assign [class="URxvt" instance="ncmpc"] 11
+#assign [class="URxvt" instance="mpd"] 11
+#assign [class="URxvt" instance="alsamixer"] 11
+#assign [class="URxvt" instance="transmission"] 12
  
 ### Applications à démarrer avec i3 (ce sont des exemples persos, vous mettez bien ce que vous voulez ;):
 
+# Polkit
+exec /usr/bin/lxpolkit
+
+# Xmodmap
+exec xmodmap $HOME/.Xmodmap
+# Ecran au-dessus
+exec --no-startup-id xrandr --output eDP --primary --mode 1600x900 --pos 0x1024 --rotate normal --output HDMI-A-0 -    -mode 1280x1024 --pos 128x0 --rotate normal; mode "default"
 # Wallpaper
-exec /usr/bin/feh --bg-scale /home/skippy/Images/Wallpapers/my_humble_dwelling__by_kevinflemming1982-dcadbxj.png
+#exec /usr/bin/feh --bg-scale /home/skippy/Images/Wallpapers/43732154_10215943318723200_172233424134733824_n.jpg
+exec /usr/bin/feh --bg-scale /home/skippy/Images/Wallpapers/localhost.jpg
 # Transparence
 #exec /usr/bin/xcompmgr
 #exec /usr/bin/devilspie -a
@@ -336,17 +369,21 @@ exec /usr/bin/feh --bg-scale /home/skippy/Images/Wallpapers/my_humble_dwelling__
 exec /usr/bin/nm-applet
 exec /usr/bin/blueman-applet
 exec /usr/bin/volumeicon
+exec /usr/bin/octopi-notifier
+
 exec numlockx on
 # Messageries
-exec urxvt -name weechat -e weechat
-exec whatsie
-exec messengerfordesktop
-exec ripcord
+#exec lxterminal -name weechat -e screen -dR weechat weechat
+#exec whatsie
+#exec messengerfordesktop
+#exec ripcord
 # Mails
-exec urxvt -name mutt -e mutt
-exec thunderbird
+#exec urxvt -name mutt -e mutt
+#exec thunderbird
 # Souris (fait "disparaitre" le curseur au bout d'une seconde d'inactivité)
 exec unclutter -idle 1
+# Media
+#exec qutebrowser bitrad.io
  
 # Modification des couleurs de la fenêtre ayant le focus:
 # class	       	   bordure	fond	texte	indicateur
@@ -364,6 +401,7 @@ bindsym XF86MonBrightnessUp exec sudo sh $HOME/bin/stk_bright_up.sh
 bindsym $mod+XF86AudioRaiseVolume exec sudo sh $HOME/bin/stk_bright_up.sh
 bindsym XF86MonBrightnessDown exec sudo sh $HOME/bin/stk_bright_down.sh
 bindsym $mod+XF86AudioLowerVolume exec sudo sh $HOME/bin/stk_bright_down.sh
+bindsym $mod+Print exec import -window root /tmp/i3.png; exec notify-send  "Screenshot envoyé dans /tmp/i3.png" 
  
 # Définition des raccourcis d'applications (avec bindcode)
 bindcode 122 exec amixer -q set Master 5dB- unmute
@@ -397,6 +435,11 @@ bindsym $mod+b border toggle
 #bindsym $mod+y fullscreen disable; floating enable; resize set 400 300; sticky enable; move window to position 1515 20
 
 
+#https://wiki.archlinux.org/index.php/Rofi#Execute_shell_commands_from_rofi
+#Execute shell command in Rofi
+bindsym $alt+F2 exec --no-startup-id "rofi -show drun -font \\"DejaVu 9\\" -run-shell-command '{terminal} -e \\" {cmd}; read -n 1 -s\\"'"
+
+
 # Assign miscellaneous settings (the last four require i3-gaps)
 font pango:Terminus 8
 hide_edge_borders both
@@ -422,6 +465,12 @@ mode "$mode_display" {
 # Declare here the shortcut to bring the display selection menu
 bindsym $mod+F4 mode "$mode_display"
 
+
+### Quake console for i3
+# https://github.com/NearHuscarl/i3-quake/blob/master/i3-quake
+# Note à moi-même : Ce n'est pas encore ce que je cherche, mais je garde par habitude...
+bindsym Mod1+Tab       exec --no-startup-id i3-switch-tabs right
+bindsym Mod1+Shift+Tab exec --no-startup-id i3-switch-tabs left
 
 
 # vim:filetype=i3:foldmethod=manual

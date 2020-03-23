@@ -1,0 +1,89 @@
+// vim:ts=4:sw=4:et
+{
+    // splitv split container with 2 children
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.7,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "none",
+            "current_border_width": 0,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 496,
+               "width": 1105,
+               "x": 8,
+               "y": 1069
+            },
+            "name": "window manager - Populate an entire pre-configured workspace in i3wm - Unix & Linux Stack Exchange - qutebrowser",
+            "percent": 0.590692124105012,
+            "swallows": [
+               {
+               // "class": "^qutebrowser$",
+               // "instance": "^qutebrowser$",
+               // "title": "^window\\ manager\\ \\-\\ Populate\\ an\\ entire\\ pre\\-configured\\ workspace\\ in\\ i3wm\\ \\-\\ Unix\\ \\&\\ Linux\\ Stack\\ Exchange\\ \\-\\ qutebrowser$",
+               // "transient_for": "^$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "none",
+            "current_border_width": 0,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 530,
+               "width": 814,
+               "x": 0,
+               "y": 0
+            },
+            "name": "skippy@stkarch:~/.config/i3",
+            "percent": 0.409307875894988,
+            "swallows": [
+               {
+               // "class": "^Lxterminal$",
+               // "instance": "^lxterminal$",
+               // "title": "^skippy\\@stkarch\\:\\~\\/\\.config\\/i3$",
+               // "transient_for": "^$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    // tabbed split container with 1 children
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "tabbed",
+    "percent": 0.3,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "none",
+            "current_border_width": 0,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 987,
+               "width": 1280,
+               "x": 128,
+               "y": 37
+            },
+            "name": "Telegram (146753)",
+            "percent": 1,
+            "swallows": [
+               {
+               // "class": "^TelegramDesktop$",
+               // "instance": "^telegram\\-desktop$",
+               // "title": "^Telegram\\ \\(146753\\)$",
+               // "transient_for": "^$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
